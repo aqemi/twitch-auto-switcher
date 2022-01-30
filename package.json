@@ -9,16 +9,18 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "lodash.debounce": "^4.0.8",
+    "lodash-es": "^4.17.21",
     "rxjs": "^6.5.5",
+    "tslib": "^2.3.1",
     "vue": "^2.6.11",
-    "vue-class-component": "^7.2.2",
+    "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^8.4.1"
   },
   "devDependencies": {
     "@types/chrome": "0.0.99",
     "@types/firefox-webext-browser": "^67.0.2",
-    "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash": "^4.14.178",
+    "@types/lodash-es": "^4.17.5",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "@vue/cli-plugin-eslint": "~4.2.0",

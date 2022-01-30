@@ -24,6 +24,7 @@
 
 html {
   font-size: 62.5%;
+  text-size-adjust: 100%;
 }
 
 svg {
@@ -31,11 +32,30 @@ svg {
 }
 
 body {
-  padding: 16px;
   width: 300px;
   color: #0e0e10;
   font-family: Roobert, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
+}
+
+.container {
+  max-height: 567px;
+  padding: 16px 12px 0 16px;
+  overflow:scroll;
+  &::-webkit-scrollbar {
+    background-color: #fff;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
 }
 
 .section {
@@ -45,16 +65,16 @@ body {
     align-items: center;
     justify-content: space-between;
   }
-  &--disabled {
-    opacity: 0.5;
-  }
 }
 
-label {
-  cursor: pointer;
+.label {
   font-weight: 700;
   color: #18181b;
   display: block;
+  &[for] {
+    cursor: pointer;
+    user-select: none;
+  }
 }
 
 hr {
@@ -81,13 +101,20 @@ hr {
 .mg-b-1 {
   margin-bottom: 1rem;
 }
-
-.pd-l-36 {
-  padding-left: 3.6rem !important;
+.mg-b-05 {
+  margin-bottom: 0.5rem;
 }
 
-.pd-r-36 {
-  padding-right: 3.6rem !important;
+.pd-l-24 {
+  padding-left: 2.4rem !important;
+}
+
+.pd-l-3 {
+  padding-left: 3rem !important;
+}
+
+.pd-r-3 {
+  padding-right: 3rem !important;
 }
 
 .relative {

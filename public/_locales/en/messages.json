@@ -10,19 +10,25 @@
     "message": "Twitch auto switcher settings"
   },
   "nextTargetTypeCommon": {
-    "message": "Common options"
+    "message": "Choose next stream from:"
   },
-  "commonOptionCurrent": {
-    "message": "Currently watched category"
+  "optionCommonCurrent": {
+    "message": "Current category"
   },
-  "commonOptionFeatured": {
-    "message": "Featured streams"
+  "optionCommonPopular": {
+    "message": "Popular"
   },
-  "commonOptionRecommended": {
-    "message": "Recommended streams"
+  "optionCommonRecommended": {
+    "message": "Recommended"
   },
-  "commonOptionFollowed": {
-    "message": "Followed channels"
+  "optionCommonFollowed": {
+    "message": "Followed"
+  },
+  "optionCategory": {
+    "message": "Category"
+  },
+  "optionChannel": {
+    "message": "Channel"
   },
   "nextTargetTypeCategory": {
     "message": "Categories"
@@ -34,12 +40,18 @@
     "message": "Search"
   },
   "nextTargetLabel": {
-    "message": "Select next stream:"
+    "message": "Choose next stream from:"
   },
   "enabledLabel": {
     "message": "Enabled"
   },
   "noResults": {
     "message": "No results found"
+  },
+  "selectCategory": {
+    "message": "Select category"
+  },
+  "searchCategory": {
+    "message": "Search category"
   }
 }

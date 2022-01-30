@@ -1,4 +1,6 @@
-import { NextTarget, NextTargetType, CommonOptionValue } from '@/types/next-target.interface';
+import { NextTarget, NextTargetType, CommonOptionValue, NextCategory } from '@/types/next-target.interface';
+
+type StorageKey = 'enabled' | 'nextTarget' | 'category';
 
 export class UserSettings {
   public static async isEnabled(): Promise<boolean> {
@@ -22,12 +24,20 @@ export class UserSettings {
     await this.set('nextTarget', value);
   }
 
-  private static async get<T>(key: string): Promise<T> {
+  public static async getLastSelectedCategory(): Promise<NextCategory | null> {
+    return (await this.get('category')) ?? null;
+  }
+
+  public static async setLastSelectedCategory(category: NextCategory) {
+    await this.set('category', category);
+  }
+
+  private static async get<T>(key: StorageKey): Promise<T | undefined> {
     const setting = await browser.storage.sync.get(key);
     return setting[key];
   }
 
-  private static async set(key: string, value: any): Promise<void> {
+  private static async set(key: StorageKey, value: any): Promise<void> {
     await browser.storage.sync.set({ [key]: value });
   }
 }

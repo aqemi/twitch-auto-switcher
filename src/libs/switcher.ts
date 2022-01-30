@@ -51,20 +51,15 @@ export class Switcher {
         break;
       }
 
-      case CommonOptionValue.Featured: {
-        await this.switchToFeatured(from);
+      case CommonOptionValue.Popular: {
+        await this.switchToPopular(from);
         break;
       }
 
-      case CommonOptionValue.Recommended: {
-        await this.switchToRecommended();
-        break;
-      }
-
-      case CommonOptionValue.Followed: {
-        await this.switchToFollowed();
-        break;
-      }
+      // case CommonOptionValue.Followed: {
+      //   await this.switchToFollowed();
+      //   break;
+      // }
 
       default:
         throw new Error('Unknown next specific target value');
@@ -84,7 +79,7 @@ export class Switcher {
     this.redirect(filtered[0].channel.name);
   }
 
-  private static async switchToFeatured(currentChannelId: string) {
+  private static async switchToPopular(currentChannelId: string) {
     const streams = await TwitchAPI.getFeaturedStreams();
     const filtered = streams.filter((x) => x.stream.channel._id.toString() !== currentChannelId);
     if (!filtered.length) throw new NoContentError();
@@ -94,7 +89,7 @@ export class Switcher {
 
   private static async switchToRecommended() {
     const currentStream = parseChannelName(window.location.pathname);
-    const streams =  TwitchDomApi.getRecommendedChannels().filter(x => x !== currentStream);
+    const streams = TwitchDomApi.getRecommendedChannels().filter((x) => x !== currentStream);
     if (!streams.length) {
       throw new NoContentError();
     }
@@ -103,7 +98,7 @@ export class Switcher {
 
   private static async switchToFollowed() {
     const currentStream = parseChannelName(window.location.pathname);
-    const streams =  TwitchDomApi.getFollowedChannels().filter(x => x !== currentStream);
+    const streams = TwitchDomApi.getFollowedChannels().filter((x) => x !== currentStream);
     if (!streams.length) {
       throw new NoContentError();
     }
@@ -116,7 +111,7 @@ export class Switcher {
     } catch (err) {
       console.info("Couldn't determine next stream in fallback current category - switching to featured");
       if (err instanceof NoContentError) {
-        await this.switchToFeatured(from);
+        await this.switchToPopular(from);
       }
       throw err;
     }

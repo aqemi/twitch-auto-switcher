@@ -3,22 +3,22 @@
   -ms-user-select: none;
   -webkit-user-select: none;
   font: inherit;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   height: 3rem;
   user-select: none;
   white-space: nowrap;
   padding: 0 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  transition: ease all .25s;
+  transition: ease all 0.25s;
   text-align: left;
 
-  &--dropdown{
-    padding-right:  0.75rem;
+  &--dropdown {
+    padding-right: 0.8rem;
   }
 
   &--wide {
@@ -37,125 +37,99 @@
 
   &:disabled {
     cursor: not-allowed;
+    position: none;
   }
 }
 
 .tws-button__icon {
   display: inline-flex;
-  width: 2.4rem;
+  width: 2rem;
   flex-shrink: 0;
 
-  &--dropdown {
-    margin-left: .5rem;;
-    transition: transform ease .25s;
-  }
-
-  &--dropdown-open {
-    transform: rotate(-180deg);
+  &--right {
+    margin-left: 0.5rem;
   }
 }
 
 .tws-button--primary {
   background-color: #9147ff;
+  border: 2px solid transparent;
   color: #fff;
   outline: none;
 }
 
-.tws-button--primary:focus, .tws-button--primary:hover:not(.tws-button:disabled) {
+.tws-button--primary:hover {
   background-color: #772ce8;
   color: #fff;
 }
 
-.tws-button--primary:focus {
-  box-shadow: 0 0 6px 0 #772ce8;
-}
-
-.tws-button--primary:active:not(.tws-button:disabled),.tws-button--primary:hover:active:not(.tws-button:disabled) {
-  background-color: #5c16c5;
-  color: #fff;
-}
-
 .tws-button--primary.tws-button:disabled {
-  background-color: rgba(0,0,0,.05);
-  color: rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .tws-button--secondary {
-  background-color: rgba(0,0,0,.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  background-clip: padding-box;
   color: #0e0e10;
-  outline: none
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }
 
-.tws-button--secondary:focus, .tws-button--secondary:hover:not(.tws-button:disabled) {
-  background-color: rgba(0,0,0,.15);
-  color: #0e0e10;
-}
-
-.tws-button--secondary:focus {
-  box-shadow: 0 0 6px 0 #772ce8;
-}
-
-.tws-button--secondary:active:not(.tws-button:disabled),.tws-button--secondary:hover:active:not(.tws-button:disabled) {
-  background-color: rgba(0,0,0,.2);
-  color: #0e0e10;
+.tws-button--secondary:hover {
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .tws-button--secondary.tws-button:disabled {
-  background-color: rgba(0,0,0,.05);
-  color: rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.3);
 }
-
 
 .tws-button--text {
   background-color: transparent;
   color: #772ce8;
-  outline: none
+  outline: none;
 }
 
-.tws-button--text:focus, .tws-button--text:hover:not(.tws-button:disabled) {
-  background-color: rgba(0,0,0,.05);
+.tws-button--text:focus,
+.tws-button--text:hover {
+  background-color: rgba(0, 0, 0, 0.05);
   color: #772ce8;
 }
 
-.tws-button--text:focus {
-  box-shadow: 0 0 6px 0 #772ce8;
-}
-
-.tws-button--text:active:not(.tws-button:disabled),.tws-button--text:hover:active:not(.tws-button:disabled) {
-  background-color: rgba(0,0,0,.1);
-  box-shadow: 0 0 6px 0 #772ce8;
+.tws-button--text:active,
+.tws-button--text:hover:active {
+  background-color: rgba(0, 0, 0, 0.1);
   color: #772ce8;
 }
 
 .tws-button--text.tws-button:disabled {
-  color: rgba(0,0,0,.3);
+  color: rgba(0, 0, 0, 0.3);
 }
-
 
 .tws-button--destructive {
   background-color: #e91916;
   color: #fff;
-  outline: none
+  outline: none;
 }
 
- .tws-button--destructive:hover:not(.tws-button:disabled) {
+.tws-button--destructive:hover {
   background-color: #bb1411;
   color: #fff;
 }
 
 .tws-button--destructive:focus {
   background-color: #bb1411;
-  box-shadow: 0 0 6px 0 #772ce8;
   color: #fff;
 }
 
-.tws-button--destructive:active:not(.tws-button:disabled) {
+.tws-button--destructive:active {
   background-color: #e91916;
-  box-shadow: 0 0 6px 0 #772ce8;
   color: #fff;
 }
 
 .tws-button--destructive.tws-button:disabled {
-  background-color: rgba(0,0,0,.05);
-  color: rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.3);
 }
