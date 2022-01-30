@@ -38,5 +38,7 @@
     },
     "default_title": "__MSG_popupTitle__",
     "default_popup": "popup.html"
-  }
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjK4BljfVuTP0TNeJXftEyosUUryw0K0/pS8a34d6RwGLDjDWZXBlEJrKtP1hB904rvJMs5cXTGuImlaTvZklf6TQ2CgRgFlVDnE4YWoTUa+YNLaRDwpwQejkm9AtHDQpsPG3pH9ymSw7cU87Q8v0ZmBPAzgH+IIJ4IcxtGRcMg1FmZt5JcXCtkGMpqk9ukb7RNdu7I0VZnaBQkKriWmV7/EXjfzRzFSk08f95/BBfBCi0rZAuGFYOi5IpyjgP4Vv3I8RyKIhTCl0UGIZZthjzq/3VIM/VzVAG3d4cdl9cj7paNeSxwGNV3XYExuXTSChv6Z/6D1f8lKkmweAofwtzwIDAQAB"
+
 }

@@ -37,7 +37,7 @@ export class TwitchAPI {
   }
 
   public static async getStreamsByIds(ids: string | string[]): Promise<LiveStreamsResponse> {
-    const idsArray = Array.isArray(ids) ? ids: [ids];
+    const idsArray = Array.isArray(ids) ? ids : [ids];
     return this.request<LiveStreamsResponse>(`/streams/?channel=${idsArray.join(',')}`);
   }
 

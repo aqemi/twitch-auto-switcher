@@ -13,3 +13,12 @@ export function getRandomElement<T>(list: T[]): T {
   const random = Math.round(Math.random() * list.length);
   return list[random];
 }
+
+export function translate(key: string): string {
+  return browser.i18n.getMessage(key);
+}
+
+
+export function random(): string {
+  return Math.random().toString(36).slice(2);
+}
