@@ -24,8 +24,6 @@ module.exports = {
   },
   productionSourceMap: false,
   configureWebpack: (config) => {
-    // return config;
     config.plugins.unshift(new GitRevisionPlugin());
-    // return config;
   },
 };

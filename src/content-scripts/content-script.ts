@@ -1,25 +1,19 @@
 import { Monitor } from '@/libs/monitor';
 import { Switcher } from '@/libs/switcher';
-import { tap } from 'rxjs/operators';
+import { TokenManager } from '@/libs/token-manager';
+import { from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 (function () {
-  let currentChannel: string | undefined | null;
-
-  Monitor.watchUrl()
+  from(TokenManager.validateAccessToken())
     .pipe(
+      switchMap(() => Monitor.watchUrl$()),
       Monitor.mapChannel(),
-      tap((x) => (currentChannel = x)),
-      Monitor.watchStream(),
+      Monitor.swapObservedChannel(),
     )
     .subscribe({
       complete: () => console.error('Observable completed'),
       error: (err) => console.error('Observable error', err),
       next: (from) => Switcher.switch(from),
     });
-
-  window.addEventListener('keyup', (event) => {
-    if (event.key === 'F9' && event.ctrlKey) {
-      Switcher.switch(currentChannel!);
-    }
-  });
 })();
