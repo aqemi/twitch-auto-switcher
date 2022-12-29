@@ -6,11 +6,20 @@ import {
   NextCommonOption,
 } from '@/types/next-target.interface';
 import { Option } from '@/types/option.interface';
-import { Game } from '@/types/categories.response';
+import { Category } from '@/types/categories.response';
 
-export function buildCategoriesList(categories: Game[]): NextTarget[] {
+export function formatImage(url: string, width = 50, height = 72): string {
+  return url.replace('{width}', width.toString()).replace('{height}', height.toString());
+}
+
+export function buildCategoriesList(categories: Category[]): NextTarget[] {
   return categories
-    .map((x) => ({ type: NextTargetType.Category as const, value: x.name, image: x.box.small, id: x._id?.toString() }))
+    .map((x) => ({
+      type: NextTargetType.Category as const,
+      value: x.name,
+      image: formatImage(x.box_art_url),
+      id: x.id,
+    }))
     .slice(0, 9);
 }
 

@@ -2,8 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import { TokenManager } from './libs/token-manager';
+
 // Update the declarative rules on install or upgrade.
 chrome.runtime.onInstalled.addListener(function () {
+  new TokenManager().listen();
+
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     chrome.declarativeContent.onPageChanged.addRules([
       {

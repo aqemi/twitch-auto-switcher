@@ -9,5 +9,6 @@ new Vue({
 window.addEventListener('keyup', (event) => {
   if (event.key === 'Delete' && event.ctrlKey) {
     browser.storage.sync.clear();
+    browser.storage.local.clear();
   }
 });

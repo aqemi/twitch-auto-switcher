@@ -1,37 +1,17 @@
-export interface Box {
-  large: string;
-  medium: string;
-  small: string;
-  template: string;
-}
-
-export interface Logo {
-  large: string;
-  medium: string;
-  small: string;
-  template: string;
-}
-
-export interface Game {
-  _id: number;
-  box: Box;
-  giantbomb_id: number;
-  logo: Logo;
+export interface Category {
+  id: string;
   name: string;
-  popularity: number;
+  box_art_url: string;
 }
 
-interface Top {
-  channels: number;
-  viewers: number;
-  game: Game;
+interface Pagination {
+  cursor?: string;
 }
 
-export interface TopGamesResponse {
-  _total: number;
-  top: Top[];
+interface CategoriesResponse {
+  data: Category[];
+  pagination: Pagination;
 }
 
-export interface SearchGamesResponse {
-  games: Game[] | null;
-}
+export interface TopCategoriesResponse extends CategoriesResponse {}
+export interface SearchCategoriesResponse extends CategoriesResponse {}
