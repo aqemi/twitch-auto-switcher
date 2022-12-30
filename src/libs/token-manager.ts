@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 import { RuntimeMessage } from '../types/runtime-message.enum';
 
 enum TokenType {
@@ -61,7 +60,7 @@ export class TokenManager {
   private async fetchAppAccessTokenWithinOrigin(): Promise<string> {
     const response = await fetch(process.env.VUE_APP_AUTH_ENDPOINT, {
       headers: {
-        'X-APi-Key': uuid.v4(),
+        'X-APi-Key': self.crypto.randomUUID(),
       },
     });
     if (!response.ok) {

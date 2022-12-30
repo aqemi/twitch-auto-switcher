@@ -1,9 +1,10 @@
 {
   "name": "twitch-auto-switcher",
   "description": "Chrome extension",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "serve": "vue-cli-service build --mode development --watch",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -35,9 +36,10 @@
     "git-revision-webpack-plugin": "^3.0.6",
     "less": "^3.13.1",
     "less-loader": "^5.0.0",
+    "patch-package": "^6.5.0",
     "prettier": "^2.5.1",
     "typescript": "^3.9.10",
-    "vue-cli-plugin-browser-extension": "~0.24.0",
+    "vue-cli-plugin-browser-extension": "^0.25.2",
     "vue-template-compiler": "^2.6.14"
   }
 }

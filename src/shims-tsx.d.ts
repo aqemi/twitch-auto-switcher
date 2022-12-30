@@ -10,4 +10,8 @@ declare global {
       [elem: string]: any;
     }
   }
+
+  interface Crypto {
+    randomUUID: () => string;
+  }
 }

@@ -13,12 +13,14 @@
 * [x] Screenshots
 ---
 ## 2.1.0
-* [ ] Redesign
-* [ ] Use Helix Twitch API
-* [ ] Images/icons in list
-* [ ] Logs
+* [x] Redesign
+* [x] Use Helix Twitch API
+* [x] Images/icons in list
+* [x] Manifest V3
 
 ## 2.2.0
+* [ ] Rewrite to Vue3
+* [ ] Logs
 * [ ] Add option to switch to specific channels
 
 ## 2.3.0

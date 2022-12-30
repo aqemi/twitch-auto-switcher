@@ -20,10 +20,17 @@ module.exports = {
           },
         },
       },
+      extensionReloaderOptions: {
+        entries: {
+          contentScript: 'content-script',
+          background: null,
+        },
+      },
     },
   },
   productionSourceMap: false,
   configureWebpack: (config) => {
+    config.devtool = 'cheap-source-map';
     config.plugins.unshift(new GitRevisionPlugin());
   },
 };
