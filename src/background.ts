@@ -4,10 +4,10 @@
 
 import { TokenManager } from './libs/token-manager';
 
+new TokenManager().listen();
+
 // Update the declarative rules on install or upgrade.
 chrome.runtime.onInstalled.addListener(function () {
-  new TokenManager().listen();
-
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     chrome.declarativeContent.onPageChanged.addRules([
       {
