@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 const CHANNEL_REGEX = /^\/([a-z0-9_]+)\/?$/i;
 
 export function parseChannelName(value: string) {

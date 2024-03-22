@@ -1,4 +1,5 @@
-import { NextTarget, NextTargetType, CommonOptionValue, NextCategory } from '@/types/next-target.interface';
+import browser from 'webextension-polyfill';
+import { type NextTarget, CommonOptionValue, type NextCategory, NextTargetType } from '@/types/next-target.interface';
 
 type StorageKey = 'enabled' | 'nextTarget' | 'category';
 

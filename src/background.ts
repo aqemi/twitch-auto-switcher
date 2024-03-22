@@ -1,27 +1,29 @@
-// Copyright (c) 2012 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-import { TokenManager } from './libs/token-manager';
+import browser from 'webextension-polyfill';
+import { TokenManager } from '@/libs/token-manager';
 
 new TokenManager().listen();
 
 // Update the declarative rules on install or upgrade.
-chrome.runtime.onInstalled.addListener(function () {
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-    chrome.declarativeContent.onPageChanged.addRules([
-      {
-        conditions: [
-          // When a page contains a <video> tag...
-          new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: {
-              hostEquals: 'www.twitch.tv',
-            },
-          }),
-        ],
-        // ... show the page action.
-        actions: [new chrome.declarativeContent.ShowPageAction()],
-      },
-    ]);
+browser.runtime.onInstalled.addListener(() => {
+  // Page actions are disabled by default and enabled on select tabs
+  browser.action.disable();
+
+  // Clear all rules to ensure only our expected rules are set
+  browser.declarativeContent.onPageChanged.removeRules(undefined, () => {
+    // Declare a rule to enable the action on example.com pages
+    const rule = {
+      conditions: [
+        new browser.declarativeContent.PageStateMatcher({
+          pageUrl: {
+            hostEquals: 'www.twitch.tv',
+          },
+        }),
+      ],
+      actions: [new browser.declarativeContent.ShowAction()],
+    };
+
+    // Finally, apply our new array of rules
+    const rules = [rule];
+    browser.declarativeContent.onPageChanged.addRules(rules);
   });
 });

@@ -1,5 +1,5 @@
 import { CommonOptionValue, NextTargetType } from '@/types/next-target.interface';
-import { Stream } from '@/types/streams.response';
+import type { Stream } from '@/types/streams.response';
 
 import { NoContentError } from './no-content.error';
 import { TwitchAPI } from './twitch-api';

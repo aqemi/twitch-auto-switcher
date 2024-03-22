@@ -1,5 +1,55 @@
+<script setup lang="ts">
+import { syncStorageAdapter, useStorageOptions } from '@/libs/storage-adapter';
+import { translate } from '@/libs/utils';
+import type { UiOption } from '@/types/option.interface';
+import { useStorageAsync } from '@vueuse/core';
+import { camelCase } from 'lodash-es';
+import { computed, type Component } from 'vue';
+import { CommonOptionValue, NextTargetType, type NextTarget } from '../types/next-target.interface';
+import CategoryWidget from './components/CategoryWidget.vue';
+import RadioButton from './components/RadioButton.vue';
+import { buildAllOptionsList, isCommonOption, nextTargetToUiOption } from './utils/list.util';
+
+const isEnabled = useStorageAsync<boolean>('enabled', true, syncStorageAdapter, {
+  ...useStorageOptions,
+});
+
+const defaultNextTarget: NextTarget = {
+  type: NextTargetType.Common,
+  value: CommonOptionValue.Current,
+};
+const nextTarget = useStorageAsync<NextTarget>('nextTarget', defaultNextTarget, syncStorageAdapter, {
+  ...useStorageOptions,
+});
+
+const selectedOption = computed<UiOption>({
+  get: () => nextTargetToUiOption(nextTarget.value),
+  set: (value) => {
+    if (isCommonOption(value)) {
+      nextTarget.value = value;
+    }
+  },
+});
+
+const options = buildAllOptionsList();
+
+function translateOption(option: UiOption) {
+  return translate(camelCase(getOptionKey(option)));
+}
+
+function getOptionKey(option: UiOption): string {
+  return 'value' in option ? `option_${option.type}_${option.value}` : `option_${option.type}`;
+}
+
+function resolveWidget(option: UiOption): Component | undefined {
+  if (option.type === NextTargetType.Category && selectedOption.value.type === NextTargetType.Category) {
+    return CategoryWidget;
+  }
+}
+</script>
+
 <template>
-  <div class="container">
+  <div class="container" v-cloak>
     <div class="section section--justify">
       <label for="enabled" class="label">{{ translate('enabledLabel') }}</label>
       <div class="tws-toggle">
@@ -27,76 +77,4 @@
   </div>
 </template>
 
-<script lang="ts">
-import { translate } from '@/libs/utils';
-import { Option } from '@/types/option.interface';
-import { camelCase } from 'lodash-es';
-import { Component, Vue, Watch } from 'vue-property-decorator';
-import { UserSettings } from '../libs/user-settings';
-import { NextTarget, NextTargetType } from '../types/next-target.interface';
-import CategoryWidget from './components/CategoryWidget.vue';
-import RadioButton from './components/RadioButton.vue';
-import { buildAllOptionsList, isCommonOption, nextTargetToOption } from './utils/list.util';
-
-@Component({ components: { RadioButton } })
-export default class App extends Vue {
-  public isEnabled = false;
-  public isLoading = false;
-  public nextTarget?: NextTarget | null = null;
-  public readonly options: Option[];
-  public selectedOption: Option | null = null;
-
-  constructor() {
-    super();
-    this.options = buildAllOptionsList();
-  }
-
-  public translate = translate;
-
-  @Watch('isEnabled')
-  public async onIsEnabledChanged() {
-    await UserSettings.setEnabled(this.isEnabled);
-  }
-
-  @Watch('selectedOption')
-  public async onSelect() {
-    if (this.selectedOption && isCommonOption(this.selectedOption)) {
-      this.nextTarget = this.selectedOption;
-    }
-  }
-
-  @Watch('nextTarget')
-  private async storeNextTarget() {
-    if (!this.nextTarget) {
-      throw new Error("Next target can't be empty!");
-    }
-    await UserSettings.setNextTarget(this.nextTarget);
-  }
-
-  public async created() {
-    try {
-      this.isEnabled = await UserSettings.isEnabled();
-      this.nextTarget = await UserSettings.getNextTarget();
-      this.selectedOption = nextTargetToOption(this.nextTarget);
-    } catch (err) {
-      console.error('Encountered error on initialization', err);
-    }
-  }
-
-  public translateOption(option: Option) {
-    return this.translate(camelCase(this.getOptionKey(option)));
-  }
-
-  public getOptionKey(option: Option): string {
-    return 'value' in option ? `option_${option.type}_${option.value}` : `option_${option.type}`;
-  }
-
-  public resolveWidget(option: Option): typeof Vue | undefined {
-    if (option.type === NextTargetType.Category && this.selectedOption?.type === NextTargetType.Category) {
-      return CategoryWidget;
-    }
-  }
-}
-</script>
-
-<style lang="less" src="./styles/index.less"></style>
+<style src="./styles/index.less" />
