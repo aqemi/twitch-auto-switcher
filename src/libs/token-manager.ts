@@ -1,3 +1,4 @@
+import browser from 'webextension-polyfill';
 import { RuntimeMessage } from '../types/runtime-message.enum';
 
 enum TokenType {
@@ -53,14 +54,13 @@ export class TokenManager {
       if (message === RuntimeMessage.FetchAuthToken) {
         return this.fetchAppAccessTokenWithinOrigin();
       }
-      return false;
     });
   }
 
   private async fetchAppAccessTokenWithinOrigin(): Promise<string> {
-    const response = await fetch(process.env.VUE_APP_AUTH_ENDPOINT, {
+    const response = await fetch(import.meta.env.VITE_APP_AUTH_ENDPOINT, {
       headers: {
-        'X-APi-Key': self.crypto.randomUUID(),
+        'X-API-Key': self.crypto.randomUUID(),
       },
     });
     if (!response.ok) {

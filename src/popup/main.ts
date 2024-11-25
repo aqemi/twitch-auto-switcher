@@ -1,10 +1,7 @@
-import Vue from 'vue';
-import App from './App.vue';
+import { createApp } from 'vue';
+import browser from 'webextension-polyfill';
 
-new Vue({
-  el: '#app',
-  render: (h) => h(App),
-});
+import App from './App.vue';
 
 window.addEventListener('keyup', (event) => {
   if (event.key === 'Delete' && event.ctrlKey) {
@@ -12,3 +9,5 @@ window.addEventListener('keyup', (event) => {
     browser.storage.local.clear();
   }
 });
+
+createApp(App).mount('#app');

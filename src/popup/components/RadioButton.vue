@@ -1,3 +1,34 @@
+<script lang="ts" setup>
+import { random } from '@/libs/utils';
+import { computed } from 'vue';
+
+interface RadioButtonProps<T = any> {
+  modelValue: T;
+  value: T;
+  name: string;
+  label: string;
+  disabled?: boolean;
+}
+
+interface RadioButtonEmits<T = any> {
+  (e: 'update:modelValue', value: T): void;
+}
+
+const props = defineProps<RadioButtonProps>();
+const emit = defineEmits<RadioButtonEmits>();
+
+const internalModel = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit('update:modelValue', value);
+  },
+});
+
+const id = random();
+</script>
+
 <template>
   <div class="radio-button">
     <input
@@ -6,51 +37,13 @@
       v-bind:name="name"
       v-bind:value="value"
       v-bind:id="id"
-      v-model="model"
+      v-model="internalModel"
     />
     <label v-bind:for="id">
       <div>{{ label }}</div>
     </label>
   </div>
 </template>
-
-<script lang="ts">
-import { random } from '@/libs/utils';
-import Vue from 'vue';
-import Component from 'vue-class-component';
-
-const ComponentProps = Vue.extend({
-  model: {
-    prop: 'modelValue',
-  },
-  props: {
-    modelValue: {},
-    value: {},
-    name: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-      required: true,
-    },
-    disabled: Boolean,
-  },
-});
-
-@Component({})
-export default class RadioButton extends ComponentProps {
-  public readonly id = random();
-
-  get model() {
-    return this.modelValue;
-  }
-
-  set model(value) {
-    this.$emit('input', this.value);
-  }
-}
-</script>
 
 <style lang="less" scoped>
 .radio-button {
@@ -70,6 +63,7 @@ export default class RadioButton extends ComponentProps {
         background-color: #fff;
         border-color: rgb(119, 44, 232);
       }
+
       &::after {
         background-color: rgb(119, 44, 232);
       }
@@ -79,6 +73,7 @@ export default class RadioButton extends ComponentProps {
       pointer-events: none;
     }
   }
+
   label {
     border-radius: 0.4rem;
     display: block;
@@ -87,6 +82,7 @@ export default class RadioButton extends ComponentProps {
     cursor: pointer;
     user-select: none;
     color: #18181b;
+
     > * {
       padding-left: 1rem;
     }

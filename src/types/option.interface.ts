@@ -1,3 +1,3 @@
-import { NextCommonOption, NextBaseTarget } from './next-target.interface';
+import type { NextCommonOption, NextBaseTarget } from './next-target.interface';
 
-export type Option = NextCommonOption | NextBaseTarget;
+export type UiOption = NextCommonOption | NextBaseTarget;

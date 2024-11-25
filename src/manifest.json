@@ -1,35 +1,41 @@
 {
-  "name": "__MSG_extName__",
-  "version": "0.0.0",
-  "manifest_version": 3,
-  "description": "__MSG_extDescription__",
-  "default_locale": "en",
+  "name": "Twitch Auto Switcher",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Automatically switch stream when it's finished",
   "icons": {
-    "16": "icons/icon-16.png",
-    "48": "icons/icon-48.png",
-    "128": "icons/icon-128.png"
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
   },
   "background": {
-    "service_worker": "js/background.js"
+    "scripts": [
+      "scripts/background.js"
+    ]
   },
-  "permissions": ["storage", "declarativeContent"],
+  "permissions": [
+    "storage",
+    "declarativeContent"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://www.twitch.tv/*"],
-      "js": ["js/content-script.js"],
+      "matches": [
+        "https://www.twitch.tv/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     }
   ],
-  "action": {
+  "page_action": {
     "default_icon": {
-      "16": "icons/icon-16.png",
-      "24": "icons/icon-24.png",
-      "32": "icons/icon-32.png"
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
     },
-    "default_title": "__MSG_popupTitle__",
+    "default_title": "Twitch Auto Switcher",
     "default_popup": "popup.html"
   },
-  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'" },
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjK4BljfVuTP0TNeJXftEyosUUryw0K0/pS8a34d6RwGLDjDWZXBlEJrKtP1hB904rvJMs5cXTGuImlaTvZklf6TQ2CgRgFlVDnE4YWoTUa+YNLaRDwpwQejkm9AtHDQpsPG3pH9ymSw7cU87Q8v0ZmBPAzgH+IIJ4IcxtGRcMg1FmZt5JcXCtkGMpqk9ukb7RNdu7I0VZnaBQkKriWmV7/EXjfzRzFSk08f95/BBfBCi0rZAuGFYOi5IpyjgP4Vv3I8RyKIhTCl0UGIZZthjzq/3VIM/VzVAG3d4cdl9cj7paNeSxwGNV3XYExuXTSChv6Z/6D1f8lKkmweAofwtzwIDAQAB"
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

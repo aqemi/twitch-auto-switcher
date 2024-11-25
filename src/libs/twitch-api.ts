@@ -1,7 +1,7 @@
-import { GetUsersResponse } from '@/types/users.response';
-import { GetStreamsResponse } from '@/types/streams.response';
-import { Channel, GetChannelInformationResponse } from '@/types/channel.response';
-import { TopCategoriesResponse, Category, SearchCategoriesResponse } from '@/types/categories.response';
+import type { GetUsersResponse } from '@/types/users.response';
+import type { GetStreamsResponse } from '@/types/streams.response';
+import type { Channel, GetChannelInformationResponse } from '@/types/channel.response';
+import type { TopCategoriesResponse, Category, SearchCategoriesResponse } from '@/types/categories.response';
 import { TokenManager } from './token-manager';
 
 export class TwitchAPI {
@@ -10,7 +10,7 @@ export class TwitchAPI {
     const response = await fetch(`https://api.twitch.tv/helix${path}`, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Client-Id': process.env.VUE_APP_CLIENT_ID,
+        'Client-Id': import.meta.env.VITE_APP_CLIENT_ID,
       },
     });
 

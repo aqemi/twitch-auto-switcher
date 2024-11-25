@@ -1,12 +1,13 @@
 import {
-  NextTargetType,
-  NextTargetGroupedList,
   CommonOptionValue,
-  NextTarget,
-  NextCommonOption,
+  type NextCommonOption,
+  type NextTarget,
+  type NextTargetGroupedList,
+  NextTargetType,
 } from '@/types/next-target.interface';
-import { Option } from '@/types/option.interface';
-import { Category } from '@/types/categories.response';
+
+import type { UiOption } from '@/types/option.interface';
+import type { Category } from '@/types/categories.response';
 
 export function formatImage(url: string, width = 50, height = 72): string {
   return url.replace('{width}', width.toString()).replace('{height}', height.toString());
@@ -37,7 +38,7 @@ export function buildCommonOptionsList(): NextCommonOption[] {
   return Object.values(CommonOptionValue).map((x) => ({ type: NextTargetType.Common, value: x }));
 }
 
-export function buildAllOptionsList(): Option[] {
+export function buildAllOptionsList(): UiOption[] {
   return [
     ...buildCommonOptionsList(),
     ...Object.values(NextTargetType)
@@ -46,10 +47,10 @@ export function buildAllOptionsList(): Option[] {
   ];
 }
 
-export function nextTargetToOption(nextTarget: NextTarget): Option {
+export function nextTargetToUiOption(nextTarget: NextTarget): UiOption {
   return nextTarget.type === NextTargetType.Common ? nextTarget : { type: nextTarget.type };
 }
 
-export function isCommonOption(option: Option): option is NextCommonOption {
+export function isCommonOption(option: UiOption): option is NextCommonOption {
   return option.type === NextTargetType.Common;
 }
